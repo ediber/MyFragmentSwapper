@@ -34,6 +34,16 @@ public class FragmentSwapper {
         FragmentTransaction mFt = null;
 
         newFragment = mFragmentManager.findFragmentByTag(fragmentTag);
+        if(newFragment == null){
+            try {
+                newFragment = fragmentClass.newInstance();
+
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
         newFragment.setArguments(arguments);
 
         mFt = mFragmentManager.beginTransaction();
@@ -49,10 +59,11 @@ public class FragmentSwapper {
         return newFragment;
     }
 
-    // fragment still dont exist in FragmentManager
+/*    // fragment still dont exist in FragmentManager
     public Fragment addInitialFragment(Fragment newFragment, Bundle arguments, int containerResourceId, boolean isShouldAddToBackStack, String fragmentTag) {
 
         FragmentTransaction mFt = null;
+        newFragment.setArguments(arguments);
         mFt = mFragmentManager.beginTransaction();
 
         if (isShouldAddToBackStack) {
@@ -64,7 +75,7 @@ public class FragmentSwapper {
         mFt.commit();
 
         return newFragment;
-    }
+    }*/
 
     public void clearFragments() {
 

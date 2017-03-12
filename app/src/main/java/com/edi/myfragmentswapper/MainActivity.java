@@ -32,10 +32,8 @@ public class MainActivity extends AppCompatActivity {
         frag1Initial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Fragment1 fragment1 = Fragment1.newInstance();
                 Bundle bundle = new Bundle();
-//                fragmentSwapper.swapToFragment(Fragment1.class, bundle, R.id.frame, true);
-                fragmentSwapper.addInitialFragment(Fragment1.newInstance(), bundle, R.id.frame, true, "Fragment1");
+                fragmentSwapper.swapToFragment(Fragment1.class, bundle, R.id.frame, true);
             }
         });
 
@@ -43,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                fragmentSwapper.addInitialFragment(Fragment2.newInstance(), bundle, R.id.frame, true, "Fragment2");
+                fragmentSwapper.swapToFragment(Fragment2.class, bundle, R.id.frame, true);
             }
         });
 
@@ -51,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                fragmentSwapper.swapToFragment(Fragment1.class, bundle, R.id.frame, true);
+                fragmentSwapper.swapToFragment(Fragment1.class, bundle, R.id.frame, false);
             }
         });
 
@@ -59,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                fragmentSwapper.swapToFragment(Fragment2.class, bundle, R.id.frame, true);
+                fragmentSwapper.swapToFragment(Fragment2.class, bundle, R.id.frame, false);
             }
         });
 
