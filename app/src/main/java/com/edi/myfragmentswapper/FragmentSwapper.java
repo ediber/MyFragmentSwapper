@@ -27,30 +27,34 @@ public class FragmentSwapper {
         return fragmentSwapper;
     }
 
-    public Fragment swapToFragment(Class<? extends Fragment> fragmentClass, Bundle arguments, int containerResourceId, boolean isShouldAddToBackStack) {
+    public Fragment swapToFragment(Class<? extends Fragment> fragmentClass, Bundle arguments, int containerResourceId, boolean isShouldAddToBackStack, boolean add) {
 
         String fragmentTag = fragmentClass.getSimpleName();
         Fragment newFragment = null;
         FragmentTransaction mFt = null;
 
         newFragment = mFragmentManager.findFragmentByTag(fragmentTag);
-        if(newFragment == null){
+        mFt = mFragmentManager.beginTransaction();
+
+//        if(newFragment == null){
             try {
                 newFragment = fragmentClass.newInstance();
+                newFragment.setArguments(arguments);
 
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-        }
-        newFragment.setArguments(arguments);
+//        }
 
-        mFt = mFragmentManager.beginTransaction();
 
-        if (isShouldAddToBackStack) {
+
+        if (add) {
             mFt.add(containerResourceId, newFragment, fragmentTag);
-            mFt.addToBackStack(fragmentTag);
+            if (isShouldAddToBackStack) {
+                mFt.addToBackStack(fragmentTag);
+            }
         } else {
             mFt.replace(containerResourceId, newFragment, fragmentTag);
         }
@@ -96,7 +100,10 @@ public class FragmentSwapper {
     }
 
     public void popFragment() {
-
         mFragmentManager.popBackStack();
+    }
+
+    public int getFragmentsCount(){
+        return mFragmentManager.getBackStackEntryCount();
     }
 }
