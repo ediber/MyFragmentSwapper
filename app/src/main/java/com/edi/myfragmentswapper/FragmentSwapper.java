@@ -19,11 +19,8 @@ public class FragmentSwapper {
     }
 
 
-
     public static FragmentSwapper getInstance(FragmentManager fragmentManager) {
-        if(mFragmentManager == null){
-            fragmentSwapper = new FragmentSwapper(fragmentManager);
-        }
+        fragmentSwapper = new FragmentSwapper(fragmentManager);
         return fragmentSwapper;
     }
 
@@ -37,17 +34,16 @@ public class FragmentSwapper {
         mFt = mFragmentManager.beginTransaction();
 
 //        if(newFragment == null){
-            try {
-                newFragment = fragmentClass.newInstance();
-                newFragment.setArguments(arguments);
+        try {
+            newFragment = fragmentClass.newInstance();
+            newFragment.setArguments(arguments);
 
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 //        }
-
 
 
         if (add) {
@@ -58,7 +54,11 @@ public class FragmentSwapper {
         } else {
             mFt.replace(containerResourceId, newFragment, fragmentTag);
         }
-        mFt.commit();
+        try {
+            mFt.commit();
+        } catch (Exception e) {
+
+        }
 
         return newFragment;
     }
@@ -103,7 +103,7 @@ public class FragmentSwapper {
         mFragmentManager.popBackStack();
     }
 
-    public int getFragmentsCount(){
+    public int getFragmentsCount() {
         return mFragmentManager.getBackStackEntryCount();
     }
 }

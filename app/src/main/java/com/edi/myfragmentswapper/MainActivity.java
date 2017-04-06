@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 fragmentSwapper.swapToFragment(Fragment1.class, bundle, R.id.frame, true, false);
-//                fragmentSwapper.addInitialFragment(Fragment1.newInstance(), bundle, R.id.frame, false, "");
             }
         });
 
@@ -72,15 +71,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     public void onBackPressed() {
-       /* if(fragmentSwapper.getFragmentsCount() <= 1){
-            finish();
-        } else {
-            super.onBackPressed();
-        }*/
-
         int count = getFragmentManager().getBackStackEntryCount();
 
         if (count == 0) {
@@ -91,33 +83,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*@Override
-    public void onBackPressed() {
-        Log.d(TAG, "onBackPressed");
-        super.onBackPressed();
-    }
-*/
-    @Override
-    protected void onStop() {
-        Log.d(TAG, "onStop");
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        Log.d(TAG, "onDestroy");
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onStart() {
-        Log.d(TAG, "onStart");
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        Log.d(TAG, "onResume");
-        super.onResume();
-    }
 }
